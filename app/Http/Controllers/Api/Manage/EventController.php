@@ -36,7 +36,10 @@ class EventController extends Controller
         ]);
         $data = $request->only('name', 'description', 'date', 'time', 'fee', 'payment_url');
 
-        user()->events()->create($data);
+        // @todo fix self consume api to get current logged in user via api
+        // user()->id is not working when calling from web
+        $data['user_id'] = 1;
+        \App\Models\Event::create($data);
 
         return response()->api([], __('Event successfully stored.'), true, 201);
     }
