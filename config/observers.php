@@ -14,9 +14,12 @@ return [
      */
 
     \App\Observers\ReferenceObserver::class => [
+        \App\Models\Event::class,
     ],
     \App\Observers\HashidsObserver::class => [
+        \App\Models\Event::class,
         \App\Models\User::class,
+        \App\Models\Subscription::class,
         \Spatie\MediaLibrary\Media::class,
     ],
 ];
