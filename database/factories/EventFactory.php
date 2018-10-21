@@ -8,6 +8,7 @@ $factory->define(App\Models\Event::class, function (Faker $faker) {
         'description' => $faker->paragraph,
         'date'        => $faker->date,
         'time'        => $faker->time,
+        'venue'		  => $faker->address,
         'payment_url' => $faker->url,
     ];
 });

@@ -46,12 +46,12 @@
 							'route_name' => 'api.datatable.manage.event',
 							'columns' => [
 								['data' => 'name', 'title' => __('table.name'), 'defaultContent' => '-'],
-								['data' => 'date', 'title' => __('table.date'), 'defaultContent' => '-'],
-								['data' => 'time', 'title' => __('table.time'), 'defaultContent' => '-'],
+								['data' => 'datetime', 'title' => __('table.datetime'), 'defaultContent' => '-'],
+								['data' => 'venue', 'title' => __('table.venue'), 'defaultContent' => '-'],
 								['data' => null , 'name' => null, 'searchable' => false],
 							],
 							'headers' => [
-								__('table.name'), __('table.date'), __('table.time'), __('table.action')
+								__('table.name'), __('table.datetime'), __('table.venue'), __('table.action')
 							],
 							'actions' => minify(view('components.actions')->render())
 						]

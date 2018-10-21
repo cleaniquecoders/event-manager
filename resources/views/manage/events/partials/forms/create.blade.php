@@ -5,11 +5,15 @@
 ])
 
 @input([
-	'label' => 'Event Name',
+	'label' => 'Name',
 ])
 
 @textarea([
-	'label' => 'Event Description',
+	'label' => 'Description',
+])
+
+@textarea([
+	'label' => 'Venue',
 ])
 
 <div class="row">

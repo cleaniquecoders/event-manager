@@ -20,6 +20,8 @@ return [
     'permission' => 'Permisi',
     'date'       => 'Tarikh',
     'time'       => 'Masa',
+    'datetime'   => 'Tarikh / Masa',
+    'venue'      => 'Tempat',
     'created_at' => 'Dijana Pada',
     'updated_at' => 'Dikemaskini Pada',
 ];

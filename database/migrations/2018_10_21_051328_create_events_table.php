@@ -16,13 +16,14 @@ class CreateEventsTable extends Migration
             $table->user();
             $table->hashslug();
             $table->slug();
+            $table->reference();
             $table->name();
             $table->description();
-            $table->reference();
             $table->date('date');
             $table->time('time');
             $table->money('fee')->default(100.00);
-            $table->string('payment_url')->nullable();
+            $table->label('venue');
+            $table->label('payment_url');
             $table->is('draft');
             $table->addAcceptance('published', 'users', false);
             $table->addAcceptance('cancelled', 'users', false);

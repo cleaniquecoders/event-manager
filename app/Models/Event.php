@@ -41,6 +41,19 @@ class Event extends Model implements HasMedia
         return $this->belongsTo(User::class);
     }
 
+    public function getDateTimeAttribute()
+    {
+        return $this->date->format('l, jS F Y') . __(' at ') . date_format(
+            \DateTime::createFromFormat('H:i:s', $this->time),
+                'g:i A'
+        );
+    }
+
+    public function scopeDetails($query)
+    {
+        return $query->with('user', 'subscribers');
+    }
+
     public function scopeIsDraft($query)
     {
         return $query->latest()->whereIsDraft(true);

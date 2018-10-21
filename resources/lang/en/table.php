@@ -20,6 +20,8 @@ return [
     'permission' => 'Permission',
     'date'       => 'Date',
     'time'       => 'Time',
+    'datetime'   => 'Date / Time',
+    'venue'      => 'Venue',
     'created_at' => 'Create At',
     'updated_at' => 'Updated At',
 ];
