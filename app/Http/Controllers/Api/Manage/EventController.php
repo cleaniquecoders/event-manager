@@ -31,7 +31,7 @@ class EventController extends Controller
             'description' => 'required|string',
             'date'        => 'required|date',
             'time'        => 'required|date_format:H:i',
-            'fee'         => 'required|min:100',
+            'fee'         => 'required',
             'payment_url' => 'required|url',
         ]);
         $data = $request->only('name', 'description', 'date', 'time', 'fee', 'payment_url');
@@ -69,8 +69,8 @@ class EventController extends Controller
             'name'        => 'required|string|max:255',
             'description' => 'required|string',
             'date'        => 'required|date',
-            'time'        => 'required|date_format:H:i',
-            'fee'         => 'required|min:100',
+            'time'        => 'required',
+            'fee'         => 'required',
             'payment_url' => 'required|url',
         ]);
 
