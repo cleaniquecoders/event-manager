@@ -19,21 +19,34 @@
 							class="nav-link {{ is_active_nav([
 								'manage.users.index',
 								'manage.acl.index',
-								'manage.oauth.passport'
+								'manage.oauth.passport',
+								'manage.events.index'
 								]) ? 'active' : '' }}" 
 							data-toggle="dropdown">
 							@icon('fe fe-grid') Manage</a>
 						<div class="dropdown-menu dropdown-menu-arrow">
+							@can('event-index')
+								<a href="{{ route('manage.events.index') }}" class="dropdown-item ">
+									@icon('fe fe-calendar') Events
+								</a>
+							@endcan
+
 							@can('user-index')
-								<a href="{{ route('manage.users.index') }}" class="dropdown-item ">Users</a>
+								<a href="{{ route('manage.users.index') }}" class="dropdown-item ">
+									@icon('fe fe-users') Users
+								</a>
 							@endcan
 
 							@can('acl-index')
-								<a href="{{ route('manage.acl.index') }}" class="dropdown-item ">ACL</a>
+								<a href="{{ route('manage.acl.index') }}" class="dropdown-item ">
+									@icon('fe fe-slash') ACL
+								</a>
 							@endcan
 
 							@can('passport-index')
-								<a href="{{ route('manage.oauth.passport') }}" class="dropdown-item ">OAuth</a>
+								<a href="{{ route('manage.oauth.passport') }}" class="dropdown-item ">
+									@icon('fe fe-unlock') OAuth
+								</a>
 							@endcan
 						</div>
 					</li>

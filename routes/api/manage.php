@@ -1,6 +1,5 @@
 <?php
 
-
 /*
  * @todo protect routes, allow for self-consume API
  */
@@ -9,6 +8,7 @@ Route::group([
     'prefix'    => 'manage',
     'as'        => 'manage.',
 ], function () {
+    Route::resource('events', 'EventController')->except('create', 'edit');
     Route::resource('users', 'UserController')->except('create', 'edit');
     Route::get('acl', 'AclController@index')->name('acl.index');
     Route::put('acl', 'AclController@update')->name('acl.update');

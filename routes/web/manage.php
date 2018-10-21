@@ -1,11 +1,11 @@
 <?php
 
-
 Route::group([
     'namespace' => 'Manage',
     'prefix'    => 'manage',
     'as'        => 'manage.',
 ], function () {
+    Route::resource('events', 'EventController')->except('store', 'update', 'destroy');
     Route::resource('users', 'UserController')->except('store', 'update', 'destroy');
     Route::resource('acl', 'AclController')->except('store', 'update', 'destroy');
     Route::get('passport', 'PassportController')
