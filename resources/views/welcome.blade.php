@@ -1,26 +1,58 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-md-center mt-5">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                <h1 class="text-center">
-                    @logo(['height' => '128px'])
-                    <br>
-                    @appName()
-                </h1>
-                <hr>
-                <h5 class="text-center">Ready with Bootstrap 4, Font Awesome 5, Select2, Datatable and many more!</h5>
-                <hr>
-                <div class="links d-flex justify-content-center">
-                    <a href="https://getbootstrap.com/">Bootstrap 4</a>&nbsp;&nbsp;
-                    <a href="https://fontawesome.com/">Font Awesome 5</a>&nbsp;&nbsp;
-                    <a href="https://github.com/spatie">Spatie</a>&nbsp;&nbsp;
-                    <a href="https://github.com/cleaniquecoders">Cleanique Coders</a>&nbsp;&nbsp;
-                    <a href="https://github.com/cleaniquecoders/laravel-boilerplate/blob/master/README.md">Documentation</a>&nbsp;&nbsp;
-                    <a href="https://github.com/cleaniquecoders/laravel-boilerplate">GitHub</a>
+    <div class="row">
+        <div class="col">
+            @forelse ($events as $event)
+                @card
+                    @slot('card_body')
+                        <div class="row">
+                            <div class="col-4">
+                                <h4>{{ $event->name }}</h4>
+                                <span class="">
+                                    @icon('fe fe-calendar') {{ $event->date_time }}
+                                </span>
+                                <br>
+                                <span class="">
+                                    @icon('fe fe-map-pin') {{ $event->venue }}
+                                </span>
+                                <br>
+                                <span class="badge badge-primary">
+                                    RM {{ $event->fee }}
+                                </span>
+                                <span class="badge badge-success">
+                                    {{ $event->subscribers->count() }} subscriber(s)
+                                </span>
+                            </div>
+                            <div class="col-8">
+                                <p>
+                                    {{ str_limit($event->description, 255) }}
+                                </p>
+                                @auth 
+                                    <div class="float-right">
+                                        <a href#" class="btn btn-default btn-sm border-primary">
+                                            {{ __('Subscribe') }}
+                                        </a>
+                                    </div>
+                                @else 
+                                    <div class="btn-group float-right">
+                                        <a href="{{ route('register') }}" class="btn btn-default btn-sm border-primary">
+                                            {{ __('Register') }}
+                                        </a>
+                                        <a href="{{ route('login') }}" class="btn btn-success btn-sm border-success">
+                                            {{ __('Login') }}
+                                        </a>
+                                    </div>
+                                @endauth
+                            </div>
+                        </div>
+                    @endslot
+                @endcard
+            @empty 
+                <div class="alert alert-warning">
+                    {{ __('Sorry, no new event at the moment.') }}
                 </div>
-            </div>
+            @endforelse
         </div>
     </div>
 @endsection

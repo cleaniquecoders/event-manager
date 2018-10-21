@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Event;
+
 class WelcomeController extends Controller
 {
     public function __invoke()
     {
-        return view('welcome');
+    	$events = Event::details()->isPublished()->get();
+        return view('welcome', compact('events'));
     }
 }
