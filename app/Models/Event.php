@@ -49,9 +49,17 @@ class Event extends Model implements HasMedia
         );
     }
 
+    public function setTimeAttribute($value)
+    {
+        $this->attributes['time'] = date_format(
+            \DateTime::createFromFormat('g:i:s A', $value),
+                'H:i:s'
+        );
+    }
+
     public function getHasSubscribersAttribute()
     {
-        return ($this->subscribers()->count() > 0);
+        return $this->subscribers()->count() > 0;
     }
 
     public function scopeDetails($query)
