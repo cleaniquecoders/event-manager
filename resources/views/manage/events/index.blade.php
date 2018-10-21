@@ -13,11 +13,12 @@
 		],
 		'columns' => [
 			'name' => __('table.name'), 
-			'email' => __('table.email'), 
-			'roles_to_string' => __('table.role'), 
-			'roles' => __('table.role'), 
-			'created_at' => __('table.created_at'),
-			'updated_at' => __('table.updated_at')
+			'description' => __('Description'), 
+			'date' => __('Date'), 
+			'time' => __('Time'), 
+			'venue' => __('Venue'), 
+			'fee' => __('Fee (MYR)'), 
+			'payment_url' => __('Payment URL'),
 		],
 		'forms' => [
 			'create' => 'event-form',

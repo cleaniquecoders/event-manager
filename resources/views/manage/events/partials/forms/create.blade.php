@@ -36,6 +36,8 @@
 <div class="row">
 	<div class="col-6">
 		@input([
+			'id' => 'fee',
+			'name' => 'fee',
 			'label' => 'Fee (MYR)',
 			'placeholder' => '100.00',
 			'min' => 100
@@ -43,6 +45,8 @@
 	</div>
 	<div class="col-6">
 		@input([
+			'id' => 'payment_url',
+			'name' => 'payment_url',
 			'label' => 'Payment URL',
 			'placeholder' => 'Link to Payment'
 		])

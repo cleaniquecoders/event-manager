@@ -1,12 +1,12 @@
 @component('components.modals.base', [
-    'id' => 'view-user-modal',
-    'modal_title' => 'User Details',
+    'id' => 'view-event-modal',
+    'modal_title' => 'Event Details',
     ])
     @slot('modal_body')
-        @include('components.table', ['table_id' => 'user-details'])
+        @include('components.table', ['table_id' => 'event-details'])
     @endslot
     @slot('modal_footer')
-        <a href="#" id="edit-user-link"
+        <a href="#" id="edit-event-link"
             @include('components.tooltip', ['tooltip' => 'Edit'])
             class="float-right btn btn-primary">
             <i class="fe fe-edit"></i> Edit
