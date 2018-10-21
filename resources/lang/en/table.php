@@ -18,6 +18,8 @@ return [
     'username'   => 'Username',
     'role'       => 'Role',
     'permission' => 'Permission',
+    'date'       => 'Date',
+    'time'       => 'Time',
     'created_at' => 'Create At',
     'updated_at' => 'Updated At',
 ];

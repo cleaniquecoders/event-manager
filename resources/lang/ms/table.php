@@ -18,6 +18,8 @@ return [
     'username'   => 'Username',
     'role'       => 'Peranan',
     'permission' => 'Permisi',
+    'date'       => 'Tarikh',
+    'time'       => 'Masa',
     'created_at' => 'Dijana Pada',
     'updated_at' => 'Dikemaskini Pada',
 ];

@@ -16,5 +16,6 @@ Route::group([
     'prefix'    => 'manage',
     'as'        => 'manage.',
 ], function () {
+    Route::get('events', 'EventController')->name('event');
     Route::get('users', 'UserController')->name('user');
 });

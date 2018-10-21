@@ -1,15 +1,15 @@
 @extends('layouts.admin')
 
 @section('content')
-	@include('manage.users.partials.styles')
-	@include('manage.users.partials.scripts', [
-		'table_id' => 'user-management',
+	@include('manage.events.partials.styles')
+	@include('manage.events.partials.scripts', [
+		'table_id' => 'event-management',
 		'primary_key' => 'hashslug',
 		'routes' => [
-			'show' => 'api.manage.users.show',
-			'store' => 'api.manage.users.store',
-			'update' => 'api.manage.users.update',
-			'destroy' => 'api.manage.users.destroy',
+			'show' => 'api.manage.events.show',
+			'store' => 'api.manage.events.store',
+			'update' => 'api.manage.events.update',
+			'destroy' => 'api.manage.events.destroy',
 		],
 		'columns' => [
 			'name' => __('table.name'), 
@@ -20,37 +20,38 @@
 			'updated_at' => __('table.updated_at')
 		],
 		'forms' => [
-			'create' => 'user-form',
-			'edit' => 'user-form',
+			'create' => 'event-form',
+			'edit' => 'event-form',
 		], 
 		'disabled' => [
 			'email'
 		]
 	])
-	@include('manage.users.partials.modals.form')
-	@include('manage.users.partials.modals.show')
+	@include('manage.events.partials.modals.form')
+	@include('manage.events.partials.modals.show')
 	<div class="row justify-content-center">
 		<div class="col">
 			@component('components.card')
 				@slot('card_title')
 					@include('components.modals.button', [
 						'modal_btn_classes' => 'create-action-btn float-right',
-						'label' => __('New User'),
+						'label' => __('New Event'),
 						'icon' => 'fe fe-plus'
 					])
 				@endslot
 				@slot('card_body')
 					@component('components.datatable', 
 						[
-							'table_id' => 'user-management',
-							'route_name' => 'api.datatable.manage.user',
+							'table_id' => 'event-management',
+							'route_name' => 'api.datatable.manage.event',
 							'columns' => [
 								['data' => 'name', 'title' => __('table.name'), 'defaultContent' => '-'],
-								['data' => 'email', 'title' => __('table.email'), 'defaultContent' => '-'],
+								['data' => 'date', 'title' => __('table.date'), 'defaultContent' => '-'],
+								['data' => 'time', 'title' => __('table.time'), 'defaultContent' => '-'],
 								['data' => null , 'name' => null, 'searchable' => false],
 							],
 							'headers' => [
-								__('table.name'), __('table.email'), __('table.action')
+								__('table.name'), __('table.date'), __('table.time'), __('table.action')
 							],
 							'actions' => minify(view('components.actions')->render())
 						]

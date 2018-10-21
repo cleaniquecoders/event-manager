@@ -16,10 +16,6 @@ class Event extends Model implements HasMedia
     use HasDatatable, HasMediaExtended, HasSlugExtended, LogsActivityExtended,
         HasProfile, SoftDeletes;
 
-    const DRAFT     = 0;
-    const PUBLISHED = 1;
-    const CANCELLED = 2;
-
     protected $guarded = ['id'];
 
     /**
@@ -36,13 +32,8 @@ class Event extends Model implements HasMedia
      */
     protected $dates = ['deleted_at'];
 
-    /**
-     * The attributes that show in datatable.
-     *
-     * @var array
-     */
-    protected $datatable = [
-        'name', 'excerpt', 'hashslug', 'date', 'time',
+    protected $casts = [
+        'date' => 'datetime:Y-m-d',
     ];
 
     public function user()
