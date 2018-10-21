@@ -49,6 +49,11 @@ class Event extends Model implements HasMedia
         );
     }
 
+    public function getHasSubscribersAttribute()
+    {
+        return ($this->subscribers()->count() > 0);
+    }
+
     public function scopeDetails($query)
     {
         return $query->with('user', 'subscribers');

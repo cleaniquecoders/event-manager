@@ -95,6 +95,10 @@ class EventController extends Controller
             return response()->api([], __('You cannot delete published event!'), false, 401);
         }
 
+        if ($event->has_subscribers) {
+            return response()->api([], __('You cannot delete event with subscribers!'), false, 401);
+        }
+
         $event->delete();
 
         return response()->api([], __('You have successfully delete an event.'));
