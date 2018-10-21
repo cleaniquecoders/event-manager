@@ -21,7 +21,7 @@ class EventTransformer extends TransformerAbstract
             'excerpt'     => str_limit($event->description, 100),
             'date'        => $event->date->format('l, jS F Y'),
             'time'        => date_format(
-                \DateTime::createFromFormat('H:i:s', $event->time), 
+                \DateTime::createFromFormat('H:i:s', $event->time),
                 'g:i A'
             ),
         ];

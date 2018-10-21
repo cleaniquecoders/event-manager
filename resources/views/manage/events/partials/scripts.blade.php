@@ -20,21 +20,21 @@
 					axios.put(route(routes.update, id), $('#' + forms.create).serialize())
 						.then(response => {
 							$(table_id).DataTable().ajax.reload();
-							swal('{!! __('User') !!}', response.data.message, 'success');
+							swal('{!! __('Event') !!}', response.data.message, 'success');
 							$('#' + forms.create)
 								.find('input, textarea, select')
 								.val('');
-							$('#user-modal').modal('hide');
+							$('#event-modal').modal('hide');
 						}).catch(error => console.error(error));
 				} else {
 					axios.post(route(routes.store), $('#' + forms.create).serialize())
 						.then(response => {
 							$(table_id).DataTable().ajax.reload();
-							swal('{!! __('User') !!}', response.data.message, 'success');
+							swal('{!! __('Event') !!}', response.data.message, 'success');
 							$('#' + forms.create)
 								.find('input, textarea, select')
 								.val('');
-							$('#user-modal').modal('hide');
+							$('#event-modal').modal('hide');
 						}).catch(error => console.error(error));
 				}	
 			});
@@ -49,7 +49,7 @@
 				$.each(disabled, function(index, val) {
 					 $("[name='" + val + "']").prop('readonly', false);
 				});
-				$('#user-modal').modal('show');
+				$('#event-modal').modal('show');
 			});
 
 			$(document).on('click', '.show-action-btn', function(event) {
@@ -66,8 +66,8 @@
 								content += '<tr><td class="font-weight-bold text-right">'+val+'</td><td>'+label+'</td></tr>';
 							}
 						});
-						$('#user-details').html(content);
-						$('#view-user-modal').modal('show');
+						$('#event-details').html(content);
+						$('#view-event-modal').modal('show');
 					})
 					.catch(error => console.error(error));
 			});
@@ -100,7 +100,7 @@
 								}
 							}
 						});
-						$('#user-modal').modal('show');
+						$('#event-modal').modal('show');
 					})
 					.catch(error => console.error(error));
 			});
@@ -120,7 +120,7 @@
 					axios.delete(route(routes.destroy, id), {'_method' : 'DELETE'})
 						.then(response => {
 							$(table_id).DataTable().ajax.reload();
-							swal('{{ __('Delete User') }}', response.data.message, 'success');
+							swal('{{ __('Delete Event') }}', response.data.message, 'success');
 						}).catch(error => console.error(error));
 				  }
 				});

@@ -1,23 +1,13 @@
 @component('components.modals.base', [
-	'id' => 'user-modal',
-	'tooltip' => __('User'),
-	'modal_title' => __('User'),
+	'id' => 'event-modal',
+	'tooltip' => __('Event'),
+	'modal_title' => __('Event'),
 	])
 	@slot('modal_body')
-		<div class="row">
-			<div class="col-md-3 col-lg-3 col-xl-3">
-		      
-		    </div>
-		    <div class="col-md-6 col-lg-6 col-xl-6">
-		      	{{ html()->form('POST', '#')->id('user-form')->open() }}
-					@method('POST')
-					@include('manage.users.partials.forms.create')
-				{{ html()->form()->close() }}
-		    </div>
-		    <div class="col-md-3 col-lg-3 col-xl-3">
-		      
-		    </div>
-		</div>
+	  	{{ html()->form('POST', '#')->id('event-form')->open() }}
+			@method('POST')
+			@include('manage.events.partials.forms.create')
+		{{ html()->form()->close() }}
 	@endslot
 	@slot('modal_footer')
 		<button class="btn btn-success form-btn">{{ __('Save') }}</button> 

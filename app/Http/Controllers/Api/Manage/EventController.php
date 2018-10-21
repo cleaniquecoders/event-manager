@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Api\Manage;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use Illuminate\Auth\Events\Registered;
+use App\Models\Event;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -28,20 +27,18 @@ class EventController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name'     => 'required|string|max:255',
-            'email'    => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'name'        => 'required|string|max:255',
+            'description' => 'required|string',
+            'date'        => 'required|date',
+            'time'        => 'required|date_format:H:i',
+            'fee'         => 'required|min:100',
+            'payment_url' => 'required|url',
         ]);
-        $data = $request->only('name', 'email', 'password');
-        $user = User::create([
-            'name'     => $data['name'],
-            'email'    => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
-        event(new Registered($user));
-        $user->syncRoles($request->roles);
+        $data = $request->only('name', 'description', 'date', 'time', 'fee', 'payment_url');
 
-        return response()->api([], __('User successfully stored.'), true, 201);
+        user()->events()->create($data);
+
+        return response()->api([], __('Event successfully stored.'), true, 201);
     }
 
     /**
@@ -53,18 +50,9 @@ class EventController extends Controller
      */
     public function show($id)
     {
-        $user = User::details()->findByHashSlug($id);
+        $event = Event::details()->findByHashSlug($id);
 
-        /**
-         * @todo should have a transformer to do this.
-         */
-        $user  = collect($user->only('name', 'email', 'roles_to_string', 'roles'));
-        $roles = $user->get('roles')->mapWithKeys(function ($role) {
-            return [$role->id => $role->name];
-        });
-        $user->put('roles', $roles);
-
-        return response()->api($user);
+        return response()->api($event);
     }
 
     /**
@@ -78,23 +66,19 @@ class EventController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => 'required|string|max:255',
+            'name'        => 'required|string|max:255',
+            'description' => 'required|string',
+            'date'        => 'required|date',
+            'time'        => 'required|date_format:H:i',
+            'fee'         => 'required|min:100',
+            'payment_url' => 'required|url',
         ]);
 
-        $fields = $request->only('name');
+        $data = $request->only('name', 'description', 'date', 'time', 'fee', 'payment_url');
 
-        if (! empty($request->input('password'))) {
-            $this->validate($request, [
-                'password' => 'required|string|min:6|confirmed',
-            ]);
-            $fields['password'] = bcrypt($request->input('password'));
-        }
+        Event::hashslug($id)->update($data);
 
-        $user = User::findByHashSlug($id);
-        $user->update($fields);
-        $user->syncRoles($request->input('roles'));
-
-        return response()->api([], __('User successfully updated.'), true, 201);
+        return response()->api([], __('Event successfully updated.'), true, 201);
     }
 
     /**
@@ -106,15 +90,13 @@ class EventController extends Controller
      */
     public function destroy($id)
     {
-        if ($id == user()->hashslug) {
-            return response()->api([], __('You cannot delete yourself!'), false, 401);
+        $event = Event::findByHashSlug($id);
+        if ($event->is_published) {
+            return response()->api([], __('You cannot delete published event!'), false, 401);
         }
-        $user = User::findByHashSlug($id);
-        if ($user->hasRole('developer')) {
-            return response()->api([], __('Trust me, don\'t kill your developer!'), false, 401);
-        }
-        $user->delete();
 
-        return response()->api([], __('You have successfully delete a user.'));
+        $event->delete();
+
+        return response()->api([], __('You have successfully delete an event.'));
     }
 }

@@ -1,27 +1,46 @@
-@include('components.forms.hidden', [
+@hidden([
 	'id' => 'id',
 	'name' => 'id',
 	'value' => ''
 ])
 
-@include('components.forms.input', [
-	'label' => 'Name',
+@input([
+	'label' => 'Event Name',
 ])
-@include('components.forms.input', [
-	'label' => 'E-mail',
-	'name' => 'email',
-	'type' => 'email'
+
+@textarea([
+	'label' => 'Event Description',
 ])
-@include('components.forms.input', [
-	'label' => 'Password',
-	'type' => 'password'
-])
-@include('components.forms.input', [
-	'label' => 'Password Confirmation',
-	'type' => 'password'
-])
-@include('components.forms.select-multiple', [
-	'label' => 'Role',
-	'name' => 'roles',
-	'options' => roles()->where('guard_name', 'web')->pluck('name', 'id'),
-])
+
+<div class="row">
+	<div class="col-6">
+		@input([
+			'label' => 'Date',
+			'type' => 'date'
+		])
+	</div>
+	<div class="col-6">
+		@input([
+			'label' => 'Time',
+			'type' => 'time',
+			'min' => '9:00',
+			'max' => '18:00'
+		])
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-6">
+		@input([
+			'label' => 'Fee (MYR)',
+			'placeholder' => '100.00',
+			'min' => 100
+		])
+	</div>
+	<div class="col-6">
+		@input([
+			'label' => 'Payment URL',
+			'placeholder' => 'Link to Payment'
+		])
+	</div>
+</div>
