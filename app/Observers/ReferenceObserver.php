@@ -21,7 +21,7 @@ class ReferenceObserver
      */
     public function creating(Model $model)
     {
-        $count = method_exists($model, 'getCounter') ? $model->getCounter() : ($model::count() ?? 0);
+        $count = method_exists($model, 'getCounter') ? $model->getCounter() : ($model::count() + 1);
 
         $column = method_exists($model, 'getReferenceColumn') ? $model->getReferenceColumn() : 'reference';
 
