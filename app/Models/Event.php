@@ -52,7 +52,7 @@ class Event extends Model implements HasMedia
     public function setTimeAttribute($value)
     {
         $this->attributes['time'] = date_format(
-            \DateTime::createFromFormat('g:i:s A', $value),
+            \DateTime::createFromFormat('H:i', $value),
                 'H:i:s'
         );
     }
@@ -60,6 +60,11 @@ class Event extends Model implements HasMedia
     public function getHasSubscribersAttribute()
     {
         return $this->subscribers()->count() > 0;
+    }
+
+    public function getCounter()
+    {
+        return $this->withTrashed()->count() + 1;
     }
 
     public function scopeDetails($query)
